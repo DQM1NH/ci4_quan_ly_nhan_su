@@ -1,0 +1,602 @@
+-- =========================================
+-- 1. VAI TRO
+-- =========================================
+
+CREATE TABLE vai_tro (
+    vai_tro_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_vai_tro VARCHAR(50) NOT NULL UNIQUE,
+    cap_bac INT NOT NULL UNIQUE,
+    mo_ta VARCHAR(255)
+);
+
+INSERT INTO vai_tro(ten_vai_tro, cap_bac, mo_ta)
+VALUES
+('ADMIN', 1, 'Quản trị hệ thống'),
+('TRUONG_PHONG', 2, 'Trưởng phòng'),
+('PHO_PHONG', 3, 'Phó phòng'),
+('NHAN_VIEN', 4, 'Nhân viên');
+
+-- =========================================
+-- 2. PHONG BAN
+-- =========================================
+
+CREATE TABLE phong_ban (
+    phong_ban_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_phong_ban VARCHAR(100) NOT NULL UNIQUE,
+    mo_ta TEXT
+);
+
+INSERT INTO phong_ban(ten_phong_ban, mo_ta)
+VALUES
+('IT', 'Phòng công nghệ thông tin'),
+('HR', 'Phòng nhân sự'),
+('KE_TOAN', 'Phòng kế toán'),
+('MARKETING', 'Phòng marketing');
+
+-- =========================================
+-- 3. NHAN VIEN
+-- =========================================
+
+CREATE TABLE nhan_vien (
+    nhan_vien_id INT PRIMARY KEY AUTO_INCREMENT,
+    ma_nhan_vien VARCHAR(20) UNIQUE NOT NULL,
+    ho_ten VARCHAR(100) NOT NULL,
+    gioi_tinh ENUM('NAM', 'NU', 'KHAC'),
+    ngay_sinh DATE,
+    so_dien_thoai VARCHAR(15) UNIQUE,
+    email VARCHAR(100) UNIQUE,
+    dia_chi TEXT,
+    luong DECIMAL(15,2) DEFAULT 0,
+    ngay_vao_lam DATE,
+    phong_ban_id INT,
+    vai_tro_id INT,
+    quan_ly_id INT NULL,
+    trang_thai ENUM('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE',
+
+    CONSTRAINT fk_nv_phong_ban
+        FOREIGN KEY (phong_ban_id)
+        REFERENCES phong_ban(phong_ban_id),
+
+    CONSTRAINT fk_nv_vai_tro
+        FOREIGN KEY (vai_tro_id)
+        REFERENCES vai_tro(vai_tro_id),
+
+    CONSTRAINT fk_nv_quan_ly
+        FOREIGN KEY (quan_ly_id)
+        REFERENCES nhan_vien(nhan_vien_id)
+);
+
+-- =========================================
+-- 4. TAI KHOAN
+-- =========================================
+
+CREATE TABLE tai_khoan (
+    tai_khoan_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_dang_nhap VARCHAR(50) UNIQUE NOT NULL,
+    mat_khau VARCHAR(255) NOT NULL,
+    nhan_vien_id INT UNIQUE,
+   	khoa BOOLEAN DEFAULT FALSE,
+
+    CONSTRAINT fk_tk_nhan_vien
+        FOREIGN KEY(nhan_vien_id)
+        REFERENCES nhan_vien(nhan_vien_id)
+);
+
+-- =========================================
+-- 5. QUYEN
+-- =========================================
+
+CREATE TABLE quyen (
+    quyen_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_quyen VARCHAR(100) UNIQUE NOT NULL,
+    mo_ta VARCHAR(255)
+);
+
+INSERT INTO quyen(ten_quyen, mo_ta)
+VALUES
+('TAO_NHAN_VIEN', 'Tạo nhân viên'),
+('CAP_NHAT_NHAN_VIEN', 'Cập nhật nhân viên'),
+('XOA_NHAN_VIEN', 'Xóa nhân viên'),
+('XEM_NHAN_VIEN', 'Xem nhân viên'),
+('DUYET_NGHI_PHEP', 'Duyệt nghỉ phép'),
+('XEM_BANG_LUONG', 'Xem bảng lương'),
+('QUAN_LY_CHAM_CONG', 'Quản lý chấm công');
+
+-- =========================================
+-- 6. VAI TRO - QUYEN
+-- =========================================
+
+CREATE TABLE vai_tro_quyen (
+    vai_tro_id INT,
+    quyen_id INT,
+    PRIMARY KEY(vai_tro_id, quyen_id),
+
+    CONSTRAINT fk_vtq_vai_tro
+        FOREIGN KEY(vai_tro_id)
+        REFERENCES vai_tro(vai_tro_id),
+
+    CONSTRAINT fk_vtq_quyen
+        FOREIGN KEY(quyen_id)
+        REFERENCES quyen(quyen_id)
+);
+
+INSERT INTO vai_tro_quyen(vai_tro_id, quyen_id)
+SELECT 1, quyen_id FROM quyen;
+
+-- =========================================
+-- 7. CA LAM
+-- =========================================
+
+CREATE TABLE ca_lam (
+    ca_lam_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_ca VARCHAR(50) NOT NULL,
+    gio_bat_dau TIME NOT NULL,
+    gio_ket_thuc TIME NOT NULL
+);
+
+INSERT INTO ca_lam(
+    ten_ca,
+    gio_bat_dau,
+    gio_ket_thuc
+)
+VALUES
+('Ca sáng', '08:00:00', '17:00:00'),
+('Ca tối', '13:00:00', '22:00:00');
+
+-- =========================================
+-- 8. CHAM CONG
+-- =========================================
+
+CREATE TABLE cham_cong (
+    cham_cong_id INT PRIMARY KEY AUTO_INCREMENT,
+    nhan_vien_id INT NOT NULL,
+    ca_lam_id INT NOT NULL,
+    ngay_cham_cong DATE NOT NULL,
+    check_in DATETIME,
+    check_out DATETIME,
+    gio_lam DECIMAL(5,2) DEFAULT 0,
+    trang_thai ENUM(
+        'PRESENT',
+        'LATE',
+        'ABSENT',
+        'EARLY_LEAVE',
+        'OVERTIME'
+    ) DEFAULT 'PRESENT',
+    ghi_chu TEXT,
+    CONSTRAINT fk_chamcong_nhan_vien
+        FOREIGN KEY(nhan_vien_id)
+        REFERENCES nhan_vien(nhan_vien_id),
+
+    CONSTRAINT fk_chamcong_ca_lam
+        FOREIGN KEY(ca_lam_id)
+        REFERENCES ca_lam(ca_lam_id)
+);
+
+-- =========================================
+-- 9. LOAI NGHI PHEP
+-- =========================================
+
+CREATE TABLE loai_nghi_phep (
+    loai_nghi_phep_id INT PRIMARY KEY AUTO_INCREMENT,
+    ten_loai_nghi VARCHAR(100) NOT NULL,
+    nghi_co_luong BOOLEAN DEFAULT TRUE,
+    so_ngay_toi_da INT DEFAULT 12,
+    mo_ta TEXT
+);
+
+INSERT INTO loai_nghi_phep(
+    ten_loai_nghi,
+    nghi_co_luong,
+    so_ngay_toi_da
+)
+VALUES
+('Nghỉ phép năm', TRUE, 12),
+('Nghỉ bệnh', TRUE, 30),
+('Nghỉ không lương', FALSE, 365);
+
+-- =========================================
+-- 10. DON NGHI PHEP
+-- =========================================
+
+CREATE TABLE don_nghi_phep (
+    don_nghi_phep_id INT PRIMARY KEY AUTO_INCREMENT,
+    nhan_vien_id INT NOT NULL,
+    loai_nghi_phep_id INT NOT NULL,
+    ngay_bat_dau DATE NOT NULL,
+    ngay_ket_thuc DATE NOT NULL,
+    tong_so_ngay INT,
+    ly_do TEXT,
+    trang_thai ENUM(
+        'PENDING',
+        'APPROVED',
+        'REJECTED',
+        'CANCELLED'
+    ) DEFAULT 'PENDING',
+    nguoi_duyet INT NULL,
+    ngay_duyet DATETIME NULL,
+
+    CONSTRAINT fk_donnghiphep_nhan_vien
+        FOREIGN KEY(nhan_vien_id)
+        REFERENCES nhan_vien(nhan_vien_id),
+
+    CONSTRAINT fk_donnghiphep_loai_nghi
+        FOREIGN KEY(loai_nghi_phep_id)
+        REFERENCES loai_nghi_phep(loai_nghi_phep_id),
+
+    CONSTRAINT fk_donnghiphep_nguoi_duyet
+        FOREIGN KEY(nguoi_duyet)
+        REFERENCES nhan_vien(nhan_vien_id)
+);
+
+-- =========================================
+-- 11. KY LUONG
+-- =========================================
+
+CREATE TABLE ky_luong (
+    ky_luong_id INT PRIMARY KEY AUTO_INCREMENT,
+    thang INT NOT NULL,
+    nam INT NOT NULL,
+    ngay_bat_dau DATE,
+    ngay_ket_thuc DATE,
+    trang_thai ENUM(
+        'OPEN',
+        'CLOSED'
+    ) DEFAULT 'OPEN'
+);
+
+-- =========================================
+-- 12. BANG LUONG
+-- =========================================
+
+CREATE TABLE bang_luong (
+    bang_luong_id INT PRIMARY KEY AUTO_INCREMENT,
+    nhan_vien_id INT NOT NULL,
+    ky_luong_id INT NOT NULL,
+    luong_co_ban DECIMAL(15,2) NOT NULL,
+    phu_cap DECIMAL(15,2) DEFAULT 0,
+    thuong DECIMAL(15,2) DEFAULT 0,
+    luong_tang_ca DECIMAL(15,2) DEFAULT 0,
+    khau_tru DECIMAL(15,2) DEFAULT 0,
+    bao_hiem DECIMAL(15,2) DEFAULT 0,
+    thue DECIMAL(15,2) DEFAULT 0,
+    luong_thuc_nhan DECIMAL(15,2) NOT NULL,
+    ngay_thanh_toan DATE,
+    trang_thai_thanh_toan ENUM(
+        'UNPAID',
+        'PAID'
+    ) DEFAULT 'UNPAID',
+
+    CONSTRAINT fk_bangluong_nhan_vien
+        FOREIGN KEY(nhan_vien_id)
+        REFERENCES nhan_vien(nhan_vien_id),
+
+    CONSTRAINT fk_bangluong_ky_luong
+        FOREIGN KEY(ky_luong_id)
+        REFERENCES ky_luong(ky_luong_id)
+);
+
+-- =========================================
+-- 13. KHEN THUONG - KY LUAT
+-- =========================================
+
+CREATE TABLE khen_thuong_ky_luat (
+    ktkl_id INT PRIMARY KEY AUTO_INCREMENT,
+    nhan_vien_id INT NOT NULL,
+    loai ENUM(
+        'KHEN_THUONG',
+        'KY_LUAT'
+    ) NOT NULL,
+    so_tien DECIMAL(15,2) NOT NULL,
+    ly_do TEXT,
+    ngay_ap_dung DATE,
+    nguoi_tao INT,
+
+    CONSTRAINT fk_ktkl_nhan_vien
+        FOREIGN KEY(nhan_vien_id)
+        REFERENCES nhan_vien(nhan_vien_id),
+
+    CONSTRAINT fk_ktkl_nguoi_tao
+        FOREIGN KEY(nguoi_tao)
+        REFERENCES nhan_vien(nhan_vien_id)
+);
+-- =========================================
+-- 16. DU LIEU MAU NHAN VIEN
+-- =========================================
+
+INSERT INTO nhan_vien(
+    ma_nhan_vien,
+    ho_ten,
+    gioi_tinh,
+    ngay_sinh,
+    so_dien_thoai,
+    email,
+    dia_chi,
+    luong,
+    ngay_vao_lam,
+    phong_ban_id,
+    vai_tro_id
+)
+VALUES
+(
+    'NV001',
+    'Nguyen Van Admin',
+    'NAM',
+    '1990-01-01',
+    '0900000001',
+    'admin@company.com',
+    'Ha Noi',
+    50000000,
+    CURDATE(),
+    1,
+    1
+),
+(
+    'NV002',
+    'Tran Thi TruongPhong',
+    'NU',
+    '1992-05-10',
+    '0900000002',
+    'manager@company.com',
+    'Ha Noi',
+    30000000,
+    CURDATE(),
+    1,
+    2
+),
+(
+    'NV003',
+    'Le Van PhoPhong',
+    'NAM',
+    '1995-02-15',
+    '0900000003',
+    'deputy@company.com',
+    'Ha Noi',
+    20000000,
+    CURDATE(),
+    1,
+    3
+),
+(
+    'NV004',
+    'Pham Van Employee',
+    'NAM',
+    '2000-09-20',
+    '0900000004',
+    'employee@company.com',
+    'Ha Noi',
+    12000000,
+    CURDATE(),
+    1,
+    4
+);
+
+-- =========================================
+-- 17. DU LIEU MAU TAI KHOAN
+-- Password: 123456
+-- =========================================
+
+INSERT INTO tai_khoan(
+    ten_dang_nhap,
+    mat_khau,
+    nhan_vien_id
+)
+VALUES
+(
+    'admin',
+    'admin',
+    1
+),
+(
+    'truongphong',
+    'truongphong',
+    2
+),
+(
+    'phophong',
+    'phophong',
+    3
+),
+(
+    'nhanvien',
+    'nhanvien',
+    4
+);
+
+-- =========================================
+-- 18. DU LIEU MAU KY LUONG
+-- =========================================
+
+INSERT INTO ky_luong(
+    thang,
+    nam,
+    ngay_bat_dau,
+    ngay_ket_thuc
+)
+VALUES
+(
+    MONTH(CURDATE()),
+    YEAR(CURDATE()),
+    DATE_FORMAT(CURDATE(), '%Y-%m-01'),
+    LAST_DAY(CURDATE())
+);
+
+-- =========================================
+-- 19. DU LIEU MAU BANG LUONG
+-- =========================================
+
+INSERT INTO bang_luong(
+    nhan_vien_id,
+    ky_luong_id,
+    luong_co_ban,
+    phu_cap,
+    thuong,
+    luong_tang_ca,
+    khau_tru,
+    bao_hiem,
+    thue,
+    luong_thuc_nhan,
+    trang_thai_thanh_toan
+)
+VALUES
+(
+    1,
+    1,
+    50000000,
+    5000000,
+    3000000,
+    2000000,
+    1000000,
+    3000000,
+    2000000,
+    54000000,
+    'UNPAID'
+);
+
+-- =========================================
+-- 20. VIEW CHI TIET NHAN VIEN
+-- =========================================
+
+CREATE VIEW v_chi_tiet_nhan_vien AS
+SELECT
+    nv.nhan_vien_id,
+    nv.ma_nhan_vien,
+    nv.ho_ten,
+    nv.gioi_tinh,
+    nv.so_dien_thoai,
+    nv.email,
+    pb.ten_phong_ban,
+    vt.ten_vai_tro,
+    nv.luong,
+    nv.trang_thai
+FROM nhan_vien nv
+LEFT JOIN phong_ban pb
+ON nv.phong_ban_id = pb.phong_ban_id
+LEFT JOIN vai_tro vt
+ON nv.vai_tro_id = vt.vai_tro_id;
+
+-- =========================================
+-- 21. VIEW CHI TIET BANG LUONG
+-- =========================================
+
+CREATE VIEW v_chi_tiet_bang_luong AS
+SELECT
+    bl.bang_luong_id,
+    nv.ho_ten,
+    kl.thang,
+    kl.nam,
+    bl.luong_co_ban,
+    bl.phu_cap,
+    bl.thuong,
+    bl.luong_tang_ca,
+    bl.khau_tru,
+    bl.bao_hiem,
+    bl.thue,
+    bl.luong_thuc_nhan,
+    bl.trang_thai_thanh_toan
+FROM bang_luong bl
+JOIN nhan_vien nv
+ON bl.nhan_vien_id = nv.nhan_vien_id
+JOIN ky_luong kl
+ON bl.ky_luong_id = kl.ky_luong_id;
+
+-- =========================================
+-- 22. STORED PROCEDURE TINH LUONG
+-- =========================================
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_tinh_luong(
+    IN p_nhan_vien_id INT,
+    IN p_ky_luong_id INT,
+    IN p_luong_co_ban DECIMAL(15,2),
+    IN p_phu_cap DECIMAL(15,2),
+    IN p_thuong DECIMAL(15,2),
+    IN p_luong_tang_ca DECIMAL(15,2),
+    IN p_khau_tru DECIMAL(15,2),
+    IN p_bao_hiem DECIMAL(15,2),
+    IN p_thue DECIMAL(15,2)
+)
+BEGIN
+    DECLARE v_luong_thuc_nhan DECIMAL(15,2);
+    SET v_luong_thuc_nhan =
+        p_luong_co_ban
+        + p_phu_cap
+        + p_thuong
+        + p_luong_tang_ca
+        - p_khau_tru
+        - p_bao_hiem
+        - p_thue;
+    INSERT INTO bang_luong(
+        nhan_vien_id,
+        ky_luong_id,
+        luong_co_ban,
+        phu_cap,
+        thuong,
+        luong_tang_ca,
+        khau_tru,
+        bao_hiem,
+        thue,
+        luong_thuc_nhan
+    )
+    VALUES(
+        p_nhan_vien_id,
+        p_ky_luong_id,
+        p_luong_co_ban,
+        p_phu_cap,
+        p_thuong,
+        p_luong_tang_ca,
+        p_khau_tru,
+        p_bao_hiem,
+        p_thue,
+        v_luong_thuc_nhan
+    );
+
+END $$
+
+DELIMITER ;
+
+-- =========================================
+-- 23. TRIGGER TU DONG TINH GIO LAM
+-- =========================================
+
+DELIMITER $$
+
+CREATE TRIGGER trg_tinh_gio_lam
+BEFORE UPDATE ON cham_cong
+FOR EACH ROW
+BEGIN
+
+    IF NEW.check_in IS NOT NULL
+       AND NEW.check_out IS NOT NULL THEN
+
+        SET NEW.gio_lam =
+        TIMESTAMPDIFF(
+            MINUTE,
+            NEW.check_in,
+            NEW.check_out
+        ) / 60;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+
+ALTER TABLE bang_luong
+ADD CONSTRAINT unique_nv_kyluong
+UNIQUE(nhan_vien_id, ky_luong_id);
+
+-- TRUONG_PHONG
+INSERT INTO vai_tro_quyen VALUES
+(2, 4), -- XEM_NHAN_VIEN
+(2, 5), -- DUYET_NGHI_PHEP
+(2, 7); -- QUAN_LY_CHAM_CONG
+
+-- PHO_PHONG
+INSERT INTO vai_tro_quyen VALUES
+(3, 4),
+(3, 7);
+
+-- NHAN_VIEN
+INSERT INTO vai_tro_quyen VALUES
+(4, 4);

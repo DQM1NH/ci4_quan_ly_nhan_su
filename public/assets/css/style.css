@@ -1,0 +1,87 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.sidebar {
+    width: 280px;
+    background: #ffffff;
+    padding: 10px 0px;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebar p {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    color: #333;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+.sidebar span{
+    color: #333; 
+    cursor: pointer;
+}
+.main-content {
+    margin-left: 280px;
+    transition: all 0.3s ease;
+}
+
+ul a{
+    text-decoration: none;
+    font-size: 17px;
+    color: black;
+    display: block;
+    width: 256px;
+    height: 40px;
+    padding: 10px 0px 10px 10px;
+}
+
+ul a:hover{
+    background-color: #009dd9;
+}
+
+ul a:hover i{
+    color: #ffffff;
+}
+
+ul a:hover span{
+    color: #ffffff;
+}
+
+.dashboard-card{
+    color: white;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.dashboard-card:hover{
+    transform: translateY(-5px);
+}
+
+.card{
+    border: none;
+    border-radius: 12px;
+}
+
+.table{
+    vertical-align: middle;
+}
