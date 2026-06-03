@@ -106,6 +106,13 @@ class AuthController extends BaseController
             return redirect()->back()->with('error', 'Sai mật khẩu');
         }
 
+        if ($user['khoa'] == 1)
+        {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Tài khoản đã bị khóa');
+        }
+
         // LAY PERMISSION
         $permissions = $authModel->getPermissions($user['vai_tro_id']);
 
