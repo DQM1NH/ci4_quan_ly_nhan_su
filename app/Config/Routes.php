@@ -218,4 +218,32 @@ $routes->group('', ['filter' => 'auth'], function($routes){
             'filter' => 'permission:XOA_VAI_TRO'
         ]);
     });
+    // ======================================
+    // NGHI PHEP
+    // ======================================
+    $routes->group('nghi_phep', ['filter' => 'auth'], function($routes) {
+        $routes->get('/', 'NghiPhepController::index');
+
+        $routes->get('create', 'NghiPhepController::create');
+
+        $routes->post('store', 'NghiPhepController::store');
+
+        $routes->get('detail/(:num)', 'NghiPhepController::detail/$1');
+
+        $routes->get('edit/(:num)', 'NghiPhepController::edit/$1');
+
+        $routes->post('update/(:num)', 'NghiPhepController::update/$1');
+
+        $routes->get('delete/(:num)', 'NghiPhepController::delete/$1');
+
+        $routes->get('approve/(:num)', 'NghiPhepController::approve/$1');
+
+        $routes->get('reject/(:num)', 'NghiPhepController::reject/$1');
+        $routes->get('export_excel', 'NghiPhepController::exportExcel', [
+            'filter' => 'permission:XUAT_NGHI_PHEP_EXCEL'
+        ]);
+        $routes->get('export_pdf', 'NghiPhepController::exportPDF', [
+            'filter' => 'permission:XUAT_NGHI_PHEP_PDF'
+        ]);
+    });
 });
