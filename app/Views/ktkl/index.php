@@ -39,7 +39,7 @@
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_KTKL')): ?>
-                        <a href="/ci4_quan_ly_nhan_su/ktkl/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Thêm mới</a>
+                        <a href="/ci4_quan_ly_nhan_su/ktkl/create" class="btn btn-primary">Thêm mới</a>
                     <?php endif; ?>
                 </div>
             </div>

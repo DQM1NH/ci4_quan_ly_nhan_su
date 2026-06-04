@@ -38,7 +38,7 @@
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_BANG_LUONG')): ?>
-                        <a href="/ci4_quan_ly_nhan_su/bang_luong/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Thêm bảng lương</a>            </div>
+                        <a href="/ci4_quan_ly_nhan_su/bang_luong/create" class="btn btn-primary">Thêm bảng lương</a>
                     <?php endif; ?>
                 </div>
             </div>

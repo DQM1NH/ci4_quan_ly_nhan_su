@@ -39,7 +39,7 @@
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_PHONG_BAN')): ?>
-                        <a href="/ci4_quan_ly_nhan_su/phong_ban/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Thêm phòng ban</a>
+                        <a href="/ci4_quan_ly_nhan_su/phong_ban/create" class="btn btn-primary">Thêm phòng ban</a>
                     <?php endif; ?>
                 </div>
             </div>

@@ -38,7 +38,7 @@
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_CHAM_CONG')): ?>
-                    <a href="/ci4_quan_ly_nhan_su/cham_cong/create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Thêm chấm công</a>
+                    <a href="/ci4_quan_ly_nhan_su/cham_cong/create" class="btn btn-primary">Thêm chấm công</a>
                     <?php endif; ?>
                 </div>
             </div>

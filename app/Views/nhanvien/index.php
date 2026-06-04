@@ -25,8 +25,8 @@
     </div>
 
     <div class="flex-grow-1 main-content">
-        <div class="container-fluid mt-2">
-            <div class="d-flex justify-content-between mb-3">
+        <div class="container-fluid mt-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Danh sách nhân viên</h3>
                 <div class = "mb-3">
                     <?php if(hasPermission('XUAT_NHAN_VIEN_EXCEL')): ?>

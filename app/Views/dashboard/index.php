@@ -192,8 +192,12 @@
                                     <?php foreach($donNghiMoi as $item): ?>
                                         <tr>
                                             <td><?= $item['ho_ten'] ?></td>
-                                            <td><?php if($item['trang_thai'] == 'PENDING'): ?>
-                                                <span class="badge bg-warning">Pending</span>
+                                            <td>
+                                                <?php if($item['trang_thai'] == 'PENDING'): ?><span class="badge bg-warning">Pending</span>
+                                                <?php endif; ?>
+                                                <?php if($item['trang_thai'] == 'APPROVED'): ?><span class="badge bg-success">Appreved</span>
+                                                <?php endif; ?>
+                                                <?php if($item['trang_thai'] == 'REJECTED'): ?><span class="badge bg-danger">Rejected</span>
                                                 <?php endif; ?>
                                             </td>
                                         </tr>
