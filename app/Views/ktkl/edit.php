@@ -29,7 +29,7 @@
 
         <div class="card shadow">
             <div class="card-header">
-                <h4><i class="fa-solid fa-pen"></i>Cập nhật dữ liệu</h4>
+                <h4>Cập nhật dữ liệu</h4>
             </div>
 
             <div class="card-body">

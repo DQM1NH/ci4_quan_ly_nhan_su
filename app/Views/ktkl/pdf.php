@@ -41,21 +41,17 @@
     </thead>
 
     <tbody>
-
-    <?php foreach($ktkls as $item): ?>
-
-        <tr>
-            <td><?= $item['ktkl_id'] ?></td>
-            <td><?= $item['ho_ten'] ?></td>
-            <td><?= $item['loai'] == 'KHEN_THUONG' ? 'Khen thưởng' : 'Kỷ luật' ?></td>
-            <td><?= $item['so_tien'] ?></td>
-            <td><?= $item['ly_do'] ?></td>
-            <td><?= $item['ngay_ap_dung'] ?></td>
-            <td><?= $item['nguoi_tao_ten'] ?></td>
-        </tr>
-
-    <?php endforeach; ?>
-
+        <?php foreach($ktkls as $item): ?>
+            <tr>
+                <td><?= $item['ktkl_id'] ?></td>
+                <td><?= $item['ho_ten'] ?></td>
+                <td><?= $item['loai'] == 'KHEN_THUONG' ? 'Khen thưởng' : 'Kỷ luật' ?></td>
+                <td><?= $item['so_tien'] ?></td>
+                <td><?= $item['ly_do'] ?></td>
+                <td><?= $item['ngay_ap_dung'] ?></td>
+                <td><?= $item['nguoi_tao_ten'] ?></td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
 

@@ -29,9 +29,6 @@
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3>Cập nhật vai trò</h3>
-                    <a href="/ci4_quan_ly_nhan_su/vai_tro" class="btn btn-secondary">
-                        <i class="fa-solid fa-arrow-left"></i>Quay lại
-                    </a>
                 </div>
 
                 <div class="card-body">
@@ -52,9 +49,8 @@
                             <textarea name="mo_ta" rows="4" class="form-control"><?= $vaitro['mo_ta'] ?></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-update"><i class="fa-solid fa-save"></i>
-                            Cập nhật
-                        </button>
+                        <button type="submit" class="btn btn-primary btn-update"><i class="fa-solid fa-save"></i>Cập nhật</button>
+                        <a href="/ci4_quan_ly_nhan_su/vai_tro" class="btn btn-secondary">Quay lại</a>
                     </form>
                 </div>
             </div>
