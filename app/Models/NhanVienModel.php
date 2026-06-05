@@ -50,7 +50,7 @@ class NhanVienModel extends Model
             )
             ->orderBy(
                 'nhan_vien_id',
-                'DESC'
+                'ASC'
             )
             ->findAll();
     }

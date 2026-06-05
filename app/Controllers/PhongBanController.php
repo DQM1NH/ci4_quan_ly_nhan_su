@@ -81,12 +81,9 @@ class PhongBanController extends BaseController
         $model = new PhongBanModel();
 
         $model->update($id, [
+            'ten_phong_ban' => $this->request->getPost('ten_phong_ban'),
 
-            'ten_phong_ban' =>
-                $this->request->getPost('ten_phong_ban'),
-
-            'mo_ta' =>
-                $this->request->getPost('mo_ta')
+            'mo_ta' => $this->request->getPost('mo_ta')
         ]);
 
         return redirect()

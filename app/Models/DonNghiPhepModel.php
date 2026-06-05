@@ -46,7 +46,7 @@ class DonNghiPhepModel extends Model
 
             ->orderBy(
                 'don_nghi_phep_id',
-                'DESC'
+                'ASC'
             )
 
             ->findAll();

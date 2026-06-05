@@ -30,7 +30,7 @@ class ChamCongModel extends Model
 
             ->join( 'ca_lam', 'ca_lam.ca_lam_id = cham_cong.ca_lam_id')
 
-            ->orderBy('cham_cong_id', 'DESC')
+            ->orderBy('cham_cong_id', 'ASC')
 
             ->findAll();
     }

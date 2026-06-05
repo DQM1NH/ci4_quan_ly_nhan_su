@@ -74,7 +74,7 @@ class TaiKhoanModel extends Model
 
             ->orderBy(
                 'tai_khoan.tai_khoan_id',
-                'DESC'
+                'ASC'
             )
 
             ->findAll();

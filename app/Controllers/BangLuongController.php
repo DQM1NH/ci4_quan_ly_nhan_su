@@ -249,8 +249,7 @@ class BangLuongController extends BaseController
             $sheet->setCellValue('I'.$row, $item['thue']);
             $sheet->setCellValue('J'.$row, $item['luong_thuc_nhan']);
             $sheet->setCellValue('I'.$row, $item['trang_thai_thanh_toan'] == 'PAID' ? 'Đã thanh toán' : 'Chưa thanh toán');
-
-
+            
             $row++;
         }
 

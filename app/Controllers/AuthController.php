@@ -179,6 +179,7 @@ class AuthController extends BaseController
         $nhanVienModel->save([
 
             'ma_nhan_vien' => $maNhanVien,
+            
             'ho_ten' => $this->request->getPost('ho_ten'),
 
             'gioi_tinh' => $this->request->getPost('gioi_tinh'),

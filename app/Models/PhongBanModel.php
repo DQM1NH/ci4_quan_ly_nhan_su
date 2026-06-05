@@ -37,7 +37,7 @@ class PhongBanModel extends Model
 
             ->orderBy(
                 'phong_ban.phong_ban_id',
-                'DESC'
+                'ASC'
             )
             ->findAll();
     }

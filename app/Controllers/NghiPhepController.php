@@ -76,7 +76,7 @@ class NghiPhepController extends BaseController
         $tongNgay = date_diff(date_create($start), date_create($end))->days + 1;
 
         $model->save([
-            'nhan_vien_id' =>session()->get('nhan_vien_id'),
+            'nhan_vien_id' => $this->request->getPost('nhan_vien_id'),
             'loai_nghi_phep_id' => $this->request->getPost('loai_nghi_phep_id'),
             'ngay_bat_dau' => $start,
             'ngay_ket_thuc' => $end,
@@ -128,11 +128,9 @@ class NghiPhepController extends BaseController
         $model = new DonNghiPhepModel();
 
         $model->update($id,[
-            'trang_thai' =>
-                'APPROVED',
+            'trang_thai' => 'APPROVED',
 
-            'ngay_duyet' =>
-                date('Y-m-d H:i:s')
+            'ngay_duyet' => date('Y-m-d H:i:s')
         ]);
 
         return redirect()->back();
@@ -143,11 +141,9 @@ class NghiPhepController extends BaseController
         $model = new DonNghiPhepModel();
 
         $model->update($id,[
-            'trang_thai' =>
-                'REJECTED',
+            'trang_thai' => 'REJECTED',
 
-            'ngay_duyet' =>
-                date('Y-m-d H:i:s')
+            'ngay_duyet' => date('Y-m-d H:i:s')
         ]);
 
         return redirect()->back();
@@ -176,10 +172,7 @@ class NghiPhepController extends BaseController
 
         $data['loainghis'] = (new LoaiNghiPhepModel())->findAll();
 
-        return view(
-            'nghiphep/edit',
-            $data
-        );
+        return view('nghiphep/edit', $data);
     }
 
     public function update($id)

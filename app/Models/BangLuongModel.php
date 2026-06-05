@@ -30,7 +30,7 @@ class BangLuongModel extends Model
             ->select('bang_luong.*, nhan_vien.ho_ten, ky_luong.thang, ky_luong.nam')
             ->join('nhan_vien', 'nhan_vien.nhan_vien_id = bang_luong.nhan_vien_id')
             ->join('ky_luong', 'ky_luong.ky_luong_id = bang_luong.ky_luong_id')
-            ->orderBy('bang_luong_id', 'DESC')
+            ->orderBy('bang_luong_id', 'ASC')
             ->findAll();
     }
 

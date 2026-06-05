@@ -48,7 +48,7 @@ class KTKLModel extends Model
 
             ->orderBy(
                 'ktkl_id',
-                'DESC'
+                'ASC'
             )
 
             ->findAll();
