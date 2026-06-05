@@ -39,13 +39,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Nhân viên</label>
-                                    <select name="nhan_vien_id" class="form-select" required>
-                                        <?php foreach($nhanviens as $nv): ?>
-                                            <option value="<?= $nv['nhan_vien_id'] ?>">
-                                                <?= $nv['ho_ten'] ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" class="form-control" value="<?= $ho_ten ?>" readonly>
+                                    <input type="hidden" name="nhan_vien_id" value="<?= $nhan_vien_id ?>">
                                 </div>
                             </div>
 

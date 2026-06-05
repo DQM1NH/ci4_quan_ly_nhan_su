@@ -21,7 +21,9 @@ class NghiPhepController extends BaseController
 
     public function create()
     {
-        $data['nhanviens'] = (new NhanVienModel())->findAll();
+        $data['ho_ten'] = session()->get('ho_ten');
+
+        $data['nhan_vien_id'] = session()->get('nhan_vien_id');
 
         $data['loainghis'] =(new LoaiNghiPhepModel())->findAll();
 
@@ -74,7 +76,7 @@ class NghiPhepController extends BaseController
         $tongNgay = date_diff(date_create($start), date_create($end))->days + 1;
 
         $model->save([
-            'nhan_vien_id' => $this->request->getPost('nhan_vien_id'),
+            'nhan_vien_id' =>session()->get('nhan_vien_id'),
             'loai_nghi_phep_id' => $this->request->getPost('loai_nghi_phep_id'),
             'ngay_bat_dau' => $start,
             'ngay_ket_thuc' => $end,
