@@ -12,15 +12,15 @@
             <!-- Mau -->
             <!-- <li style = "padding: 10px 0;"><a class = "item-link text-decoration-none" href="login"><i class="fa-solid fa-address-card"></i> <span style="color: #333; cursor: pointer;">Sơ yếu lý lịch</span></a></li> -->
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/dashboard"><i class="fa-solid fa-address-card"></i> <span>Trang chủ</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/phong_ban"><i class="fa-solid fa-triangle-exclamation"></i> <span>Quản lý phòng ban</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nhan_vien"><i class="fa-solid fa-building-user"></i> <span>Quản lý nhân viên</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/phong_ban"><i class="fa-solid fa-building"></i><span> Quản lý phòng ban</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nhan_vien"><i class="fa-solid fa-users"></i><span> Quản lý nhân viên</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nghi_phep"><i class="fa-solid fa-hand-holding-dollar"></i> <span>Nghỉ phép</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/ktkl"><i class="fa-solid fa-list-check"></i> <span>Khen thưởng, kỷ luật</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="#"><i class="fa-solid fa-clipboard"></i> <span>Ca làm</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/ktkl"><i class="fa-solid fa-list-check"></i> <span> Khen thưởng, kỷ luật</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="#"><i class="fa-solid fa-clipboard"></i> <span> Ca làm</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/cham_cong"><i class="fa-regular fa-pen-to-square"></i> <span>Chấm công</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/bang_luong"><i class="fa-regular fa-pen-to-square"></i> <span>Bảng lương</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/vai_tro"><i class="fa-regular fa-pen-to-square"></i> <span>Vai trò</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/tai_khoan"><i class="fa-solid fa-list-check"></i> <span>Tài khoản</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/tai_khoan"><i class="fa-solid fa-list-check"></i><span> Tài khoản</span></a></li>
         </ul>
     </div>
 
@@ -30,11 +30,11 @@
                 <h3>Bảng lương</h3>
                 <div class = "mb-3">
                     <?php if(hasPermission('XUAT_BANG_LUONG_EXCEL')): ?>
-                        <a href="<?= base_url('bang_luong/export_excel') ?>" class="btn btn-success">Xuất Excel</a>
+                        <a href="<?= base_url('bang_luong/export_excel') ?>" class="btn btn-success"><i class="fa-solid fa-file-excel"></i><span> Xuất Excel</span></a>
                     <?php endif; ?>
 
                     <?php if(hasPermission('XUAT_BANG_LUONG_PDF')): ?>
-                        <a href="<?= base_url('bang_luong/export_pdf') ?>" class="btn btn-danger">Xuất PDF</a>
+                        <a href="<?= base_url('bang_luong/export_pdf') ?>" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i><span> Xuất PDF</span></a>
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_BANG_LUONG')): ?>
@@ -55,7 +55,7 @@
                                 <th class = "text-center" width="250">Hành động</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
                         <?php foreach($bangluongs as $bl): ?>
                             <tr>

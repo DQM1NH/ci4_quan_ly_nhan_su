@@ -13,8 +13,8 @@
             <!-- Mau -->
             <!-- <li style = "padding: 10px 0;"><a class = "item-link text-decoration-none" href="login"><i class="fa-solid fa-address-card"></i> <span style="color: #333; cursor: pointer;">Sơ yếu lý lịch</span></a></li> -->
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/dashboard"><i class="fa-solid fa-address-card"></i> <span>Trang chủ</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/phong_ban"><i class="fa-solid fa-triangle-exclamation"></i> <span>Quản lý phòng ban</span></a></li>
-            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nhan_vien"><i class="fa-solid fa-building-user"></i> <span>Quản lý nhân viên</span></a></li>
+                        <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/phong_ban"><i class="fa-solid fa-building"></i><span> Quản lý phòng ban</span></a></li>
+            <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nhan_vien"><i class="fa-solid fa-users"></i><span> Quản lý nhân viên</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/nghi_phep"><i class="fa-solid fa-hand-holding-dollar"></i> <span>Nghỉ phép</span></a></li>
             <li><a class = "item-link text-decoration-none" href="/ci4_quan_ly_nhan_su/ktkl"><i class="fa-solid fa-list-check"></i> <span>Khen thưởng, kỷ luật</span></a></li>
             <li><a class = "item-link text-decoration-none" href="#"><i class="fa-solid fa-clipboard"></i> <span>Ca làm</span></a></li>
@@ -32,11 +32,11 @@
                 <h3></i>Nghỉ phép</h3>
                 <div class = "mb-3">
                     <?php if(hasPermission('XUAT_NGHI_PHEP_EXCEL')): ?>
-                        <a href="<?= base_url('nghi_phep/export_excel') ?>" class="btn btn-success">Xuất Excel</a>
+                        <a href="<?= base_url('nghi_phep/export_excel') ?>" class="btn btn-success"><i class="fa-solid fa-file-excel"></i><span> Xuất Excel</span></a>
                     <?php endif; ?>
 
                     <?php if(hasPermission('XUAT_NGHI_PHEP_PDF')): ?>
-                        <a href="<?= base_url('nghi_phep/export_pdf') ?>" class="btn btn-danger">Xuất PDF</a>
+                        <a href="<?= base_url('nghi_phep/export_pdf') ?>" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i><span> Xuất PDF</span></a>
                     <?php endif; ?>
 
                     <?php if(hasPermission('TAO_NGHI_PHEP')): ?>

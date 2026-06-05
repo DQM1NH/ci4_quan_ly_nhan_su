@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <a class="navbar-brand"> QUẢN LÝ NHÂN SỰ </a>
             <div class="text-white">
-                <a href="/ci4_quan_ly_nhan_su/logout" class="text-white text-decoration-none"> Đăng xuất </a>
+                <a href="/ci4_quan_ly_nhan_su/logout" class="text-white text-decoration-none"><i class="fa-solid fa-right-from-bracket"></i><span> Đăng xuất</span></a>
             </div>
         </div>
     </nav>
