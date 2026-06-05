@@ -66,7 +66,7 @@
                                     <td class = "text-center"><?= $nv['ten_vai_tro'] ?></td>
                                     <td class = "text-center"><?= number_format($nv['luong']) ?></td>
                                     <?php if(hasPermission('XOA_NHAN_VIEN')): ?>
-                                        <td class = "text-center"><a href="/ci4_quan_ly_nhan_su/nhan_vien/delete/<?= $nv['nhan_vien_id'] ?>" class="btn btn-danger btn-sm btn-delete"> Xóa </a></td>
+                                        <td class = "text-center"><a href="/ci4_quan_ly_nhan_su/nhan_vien/delete/<?= $nv['nhan_vien_id'] ?>" class="btn btn-danger btn-sm btn-delete"><i class="fa-solid fa-trash"></i><span> Xóa </span></a></td>
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>

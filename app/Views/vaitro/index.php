@@ -29,7 +29,9 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Quản lý vai trò</h3>
-                <a href="/ci4_quan_ly_nhan_su/vai_tro/create" class="btn btn-primary">Thêm vai trò</a>
+                <?php if(hasPermission('TAO_VAI_TRO')): ?>
+                    <a href="/ci4_quan_ly_nhan_su/vai_tro/create" class="btn btn-primary">Thêm vai trò</a>
+                <?php endif; ?>
             </div>
 
             <div class="card shadow">
@@ -53,13 +55,17 @@
                                 <td class = "text-center"><?= $vt['cap_bac'] ?></td>
                                 <td class = "text-center"><?= $vt['mo_ta'] ?></td>
                                 <td class = "text-center">
-                                    <a href="/ci4_quan_ly_nhan_su/vai_tro/edit/<?= $vt['vai_tro_id'] ?>" class="btn btn-warning btn-sm">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
+                                    <?php if(hasPermission('CAP_NHAT_VAI_TRO')): ?>
+                                        <a href="/ci4_quan_ly_nhan_su/vai_tro/edit/<?= $vt['vai_tro_id'] ?>" class="btn btn-warning btn-sm">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <a href="/ci4_quan_ly_nhan_su/vai_tro/delete/<?= $vt['vai_tro_id'] ?>" class="btn btn-danger btn-sm btn-delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                                    <?php if(hasPermission('XOA_VAI_TRO')): ?>
+                                        <a href="/ci4_quan_ly_nhan_su/vai_tro/delete/<?= $vt['vai_tro_id'] ?>" class="btn btn-danger btn-sm btn-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

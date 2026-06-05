@@ -79,13 +79,13 @@
 
                                 <td class = "text-center"><?= $item['nguoi_tao_ten'] ?></td>
 
-                                <td class = "text-center" width="180">
+                                <td class = "text-center" width="200">
                                     <?php if(hasPermission('CAP_NHAT_KTKL')): ?>
-                                        <a href="/ci4_quan_ly_nhan_su/ktkl/edit/<?= $item['ktkl_id'] ?>" class="btn btn-warning btn-sm"><span>Chỉnh sửa</span><i class="fa-solid fa-pen"></i></a>
+                                        <a href="/ci4_quan_ly_nhan_su/ktkl/edit/<?= $item['ktkl_id'] ?>" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i><span> Chỉnh sửa </span></a>
                                     <?php endif; ?>
 
                                     <?php if(hasPermission('XOA_KTKL')): ?>
-                                        <a href="/ci4_quan_ly_nhan_su/ktkl/delete/<?= $item['ktkl_id'] ?>"class="btn btn-danger btn-sm btn-delete"><span>Xóa</span><i class="fa-solid fa-trash"></i></a>
+                                        <a href="/ci4_quan_ly_nhan_su/ktkl/delete/<?= $item['ktkl_id'] ?>"class="btn btn-danger btn-sm btn-delete"><i class="fa-solid fa-trash"></i><span> Xóa </span></a>
                                     <?php endif; ?>
 
                                 </td>
