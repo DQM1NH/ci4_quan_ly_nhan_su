@@ -47,9 +47,8 @@
                             <textarea name="mo_ta" class="form-control"></textarea>
                         </div>
 
-                        <button class="btn btn-primary">
-                            <i class="fa-solid fa-save"></i>Lưu
-                        </button>
+                        <button class="btn btn-primary"><i class="fa-solid fa-save"></i>Lưu</button>
+                        <a href="/ci4_quan_ly_nhan_su/phong_ban" class="btn btn-secondary">Quay lại</a>
                     </form>
                 </div>
             </div>

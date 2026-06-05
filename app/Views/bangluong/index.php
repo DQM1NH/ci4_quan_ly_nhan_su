@@ -55,6 +55,7 @@
                                 <th class = "text-center" width="250">Hành động</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
                         <?php foreach($bangluongs as $bl): ?>
                             <tr>

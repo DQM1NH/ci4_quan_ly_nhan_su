@@ -68,6 +68,8 @@
                         </div>
 
                         <button class="btn btn-primary"><i class="fa-solid fa-save"></i>Lưu</button>
+                        <a href="/ci4_quan_ly_nhan_su/cham_cong" class="btn btn-secondary">Quay lại</a>
+
                     </form>
                 </div>
             </div>
